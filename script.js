@@ -1,14 +1,10 @@
 $(document).ready(function() {
-    $('.moreDetail ').click(function (event) {
-        let boxClicked = event.target.id;
-        $('.overlay ').removeClass('hideme');
-        $.post("Server.php", { boxClicked },function (data, status) {
-            // alert("data " + data + "\nstatus: " + status)
-            $('.modal-body').html(data);
+    $('.btnAction').on("click", function (){
+        let product = $(this).attr("data-product");
+        $.post("Server.php", { product },function (data, status) {
+            let newData = JSON.parse(data);
+            $('.modal-title').text(newData.title);
+            $('.modal-body').text(newData.body);
         })
-    })
-
-    $('#closeMe').click(function () {
-        $('.overlay ').addClass('hideme');
     })
 });
